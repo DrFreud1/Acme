@@ -4,7 +4,7 @@ import unittest
 class TestPicoyPlacaPredictor(unittest.TestCase):
     def test_list_int(self):
         """
-        Test that it can sum a list of integers
+        The test compares the same inputs from the .txt file with their respective outputs
         """
         inputs = ['SANTIAGO=MO09:00-12:00,MO23:00-24:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00', 
         'RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00',

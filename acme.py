@@ -65,7 +65,6 @@ if __name__ == '__main__':
 
     with open("inputs.txt") as f:
         txt = f.read().splitlines() 
-        # print(txt)
         for input in txt: 
             employee_name, working_hours = clean_input(input)
             payment = calculate_payment(working_hours)
