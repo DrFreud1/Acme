@@ -1,7 +1,5 @@
-# Acme
-Set of scripts to calculate the payments for an employee accordingly to the compensation policies from ACME company.
-
-# Exercise
+# Acme Exercise
+The following repository contains a set of scripts to calculate the payments for an employee accordingly to the compensation policies from ACME company.
 
 The company ACME offers their employees the flexibility to work the hours they want. They will pay for the hours worked based on the day of the week and time of day, according to the following table:
 
@@ -63,14 +61,37 @@ OUTPUT:
 
 The amount to pay ASTRID is: 85 USD
 
+## Requirements
+There are no requirements besides having python 3 for the main script as no external libraries were allowed for the present exercise. The only requirement for the test script is pytest library which can be installed as follows: 
+```console
+pip install pytest
+```
 
+## Solution
+There are three main functions within the main script, those are designed to carry out three main tasks:
+1. To clean the input and to make it readable for the program
+2. To check the day of the week and to calculate the payments accordingly
+3. To actually calculate the payments corresponding to each employee
 
-Solution
-The code is composed of several functions to delegate tasks, information such as work schedules and their cost per hour are stored in dictionaries to facilitate changes without the need to modify the code. Although the exercise specification is not detailed, the program has support for extended work shifts where the cost per hour varies, for example 'JAIRO = MO10: 00-20: 00' the employee works during the three specified hours and the cost per hour changes. Unit tests were performed to verify the results of the functions.
+The program can calculate payments for different work shifts on the same day, having inputs as follows: MATEO=SA14:00-18:00,SA20:00-21:00 which calculates payments for different shifts on Saturday.
 
-Requirements
-python 3
+## Testing
+Testing was carried out for the following inputs:
+1. SANTIAGO=MO09:00-12:00,MO23:00-24:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
+2. RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
+3. ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+4. GENESIS=WE09:00-11:00,FR18:00-20:00,SA00:00-02:00
+5. MATEO=SA14:00-18:00,SA20:00-21:00
+
+Their correspoding outputs are 250,215,85,130 and 105.
+
+## Running
+
 Run program
-python ioet_test_verajairo.py <INPUT>
+```console
+python3 acme.py
+```
 Run unit tests
-python exercise_test.py
+```console
+python3 acme_test.py
+```
