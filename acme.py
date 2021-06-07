@@ -1,8 +1,17 @@
-"""now variable will be used across the code to define the time of the day"""
+"""
+The following variables of ranges will be used to calculate the time 
+of the day in which the work was carried out, and to calculate paymentes accordingly
+This program interpretes 00:00 as 24:00, as no external libraries are allowed and 
+the usage of datetime library is not allowed
+"""
 
 morning_range = range(0,9)
 afternoon_range = range(9,19)
-night_range = range(18,24)
+night_range = range(18,25)
+
+"""
+The function clean_input is used to format the user's input, so it can be understood by the program
+"""
 
 def clean_input(user_input):
     clean_input = []
@@ -17,6 +26,11 @@ def clean_input(user_input):
         clean_input.append(hours_per_day)
     return employee_name, clean_input
 
+"""
+IsWeekend function determines if some part of the input corresponds
+to a day of the weekend to calculate payments accordingly
+"""
+
 def IsWeekend(day):
     flag = True
     current_day = day[0:2]
@@ -24,7 +38,10 @@ def IsWeekend(day):
         flag = False
     return flag
         
-
+"""
+calculate_payment function calculates the payments of the employees accoring to the hours
+they have worked
+"""
 def calculate_payment(working_hours):
     payment = 0
     for tuple in working_hours:
@@ -35,24 +52,23 @@ def calculate_payment(working_hours):
                 payment += (tuple[2] - tuple[1]) * 20
             elif tuple[1] in night_range and tuple[2] in night_range:
                 payment += (tuple[2] - tuple[1]) * 25
-        elif IsWeekend(tuple[0]) == False:
+        elif not IsWeekend(tuple[0]):
             if tuple[1] in morning_range and tuple[2] in morning_range:
                 payment += (tuple[2] - tuple[1]) * 25
             elif tuple[1] in afternoon_range and tuple[2] in afternoon_range:
                 payment += (tuple[2] - tuple[1]) * 15
             elif tuple[1] in night_range and tuple[2] in night_range:
                 payment += (tuple[2] - tuple[1]) * 20
-        # print(payment)
-        # print(tuple[0])
     return payment
 
 if __name__ == '__main__':
 
-    # txt = "RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00"
-    txt = "ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00"
-    employee_name, working_hours = clean_input(txt)
-    
-    # print(employee_name, working_hours)
-    payment = calculate_payment(working_hours)
-    print("The amount to pay {} is: {}".format(employee_name,payment))
+    with open("inputs.txt") as f:
+        txt = f.read().splitlines() 
+        # print(txt)
+        for input in txt: 
+            employee_name, working_hours = clean_input(input)
+            payment = calculate_payment(working_hours)
+            
+            print("The amount to pay {} is: {}".format(employee_name,payment))
     
