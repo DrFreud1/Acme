@@ -62,36 +62,32 @@ OUTPUT:
 The amount to pay ASTRID is: 85 USD
 
 ## Requirements
-There are no requirements besides having python 3 for the main script as no external libraries were allowed for the present exercise. The only requirement for the test script is pytest library which can be installed as follows: 
+You need to install pytest to run the unit tests, besides that, there are no further requirements. Install it using
 ```console
 pip install pytest
 ```
+or
+```console
+pip install -r requirements.txt
+```
 
 ## Solution
-There are three main functions within the main script, those are designed to carry out three main tasks:
-1. To clean the input and to make it readable for the program
-2. To check the day of the week and to calculate the payments accordingly
-3. To actually calculate the payments corresponding to each employee
+There are two main classes which contain the logic to calculate the payments to ACME employees, they are located in the *app* folder. 
 
-The program can calculate payments for different work shifts on the same day, having inputs as follows: MATEO=SA14:00-18:00,SA20:00-21:00 which calculates payments for different shifts on Saturday.
+Basically, what has been done is to create an Employee class that contains the name of the employee and the salary received by that employee could be updated according to the input data. The Employee class also contains the method to load and clean input data according to what is required.
 
-## Testing
-Testing was carried out for the following inputs:
-1. SANTIAGO=MO09:00-12:00,MO23:00-24:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
-2. RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
-3. ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
-4. GENESIS=WE09:00-11:00,FR18:00-20:00,SA00:00-02:00
-5. MATEO=SA14:00-18:00,SA20:00-21:00
+The PaymentManager class contains the logic necessary to update salaries of employees from Employee class, according to input data.
 
-Their correspoding outputs are 250,215,85,130 and 105.
+In the *utils* folder you'll find some constants that establish the bussiness rules for the present application.
 
+For testing, the *pytest* library is used. Besides, you can notice that Github Actions have been also used.
 ## Running
 
 Run program
 ```console
-python3 acme.py
+python3 main.py
 ```
 Run unit tests
 ```console
-python3 acme_test.py
+python3 -m pytest .
 ```
